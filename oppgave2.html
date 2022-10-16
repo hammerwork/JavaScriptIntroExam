@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 2 - Dragracing</title>
+    <link rel="stylesheet" href="css/oppgave2.css">
+</head>
+<body>
+
+    <h1>Dragracing</h1>
+
+    <div id="road-div"></div>
+    
+    <img id="blue-car" src="images/blue-car.png">
+    <img id="green-car" src="images/green-car.png">
+    <img id="red-car" src="images/red-car.png">
+
+    <div id="finish-line"></div>
+
+    <div id="output-div"></div>
+
+    <button id="start-btn">Start</button>
+
+    <script>
+
+        //Variable, finish line and cars
+        var blueCar = document.getElementById("blue-car");
+        var greenCar = document.getElementById("green-car");
+        var redCar = document.getElementById("red-car");
+        var finishLine = document.getElementById("finish-line");
+
+        //variables output-div and startbutton with simple styling to show on screen.
+        var outpuDiv = document.getElementById("output-div");
+
+        var startBtn = document.getElementById("start-btn");
+        startBtn.style.position = "absolute";
+
+        //function with button event
+        function drive(){
+
+        //Variable to set interval with function so clear-interval is functioning correct
+        var driveInterval = setInterval(function(){
+
+        //Random generators with offsetleft so end position is same as start.
+        var randomLenghtBlue = Math.floor(Math.random()*200+1);
+        blueCar.style.left = `${blueCar.offsetLeft + randomLenghtBlue}px`;
+
+        var randomLenghtGreen = Math.floor(Math.random()*200+1);
+        greenCar.style.left = `${greenCar.offsetLeft + randomLenghtGreen}px`;
+
+        var randomLenghtRed = Math.floor(Math.random()*200+1);
+        redCar.style.left = `${redCar.offsetLeft + randomLenghtRed}px`;
+
+        //if statements for winning car and clear intervals.
+        if(blueCar.offsetLeft > finishLine.offsetLeft){
+        outpuDiv.innerHTML = "Blå bil vant";
+        clearInterval(driveInterval)
+        }
+        else if(greenCar.offsetLeft > finishLine.offsetLeft){
+        outpuDiv.innerHTML = "Grønn bil vant";
+        clearInterval(driveInterval)
+        }
+        else if(redCar.offsetLeft > finishLine.offsetLeft){
+        outpuDiv.innerHTML = "Rød bil vant";
+        clearInterval(driveInterval);
+        }
+    }, 2000)
+
+}
+        //Button event
+        startBtn.onclick = drive;
+
+    </script>
+
+</body>
+</html>

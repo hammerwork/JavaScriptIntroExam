@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 1</title>
+    <link rel="stylesheet" type="text/css" href="css/oppgave1.css">
+</head>
+<body>
+
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Modern Art Maker</h1>
+
+    <label>Bredde</label>    
+    <input id="width-txt" type="text">
+
+    <label>Høyde</label>
+    <input id="height-txt" type="text">
+
+    <hr>
+
+    <label>Farge</label>
+    <input id="background-color-txt" type="text">
+
+    <hr>
+
+    <label>Posisjon fra venstre (left)</label>
+    <input id="left-txt" type="text">
+
+    <label>Posisjon fra toppen (top)</label>
+    <input id="top-txt" type="text">
+
+    <hr>
+
+    <button id="add-box-btn" >Legg til</button>
+    <button id="reset-btn">Reset</button>
+
+    <p>Antall bokser lagt til: <span id="status-span">0</span></p>
+
+    <div id="output-div"></div>
+
+    <script>
+
+        //VARIABLES:
+
+        var inputWidth = document.getElementById("width-txt");
+        var inputHeight = document.getElementById("height-txt");
+        var inputColor = document.getElementById("background-color-txt");
+        var inputDirectionX = document.getElementById("left-txt");
+        var inputDirectionY = document.getElementById("top-txt");
+
+        var addBoxBtn = document.getElementById("add-box-btn");
+        var outputDiv = document.getElementById("output-div");
+        var countDiv = document.getElementById("status-span");
+        var resetBtn = document.getElementById("reset-btn");
+
+        //Function to add div with styling
+        function addDiv(){
+            var div = document.createElement("div");
+            div.style.position = "absolute";
+            div.style.height = `${inputHeight.value}px`;
+            div.style.width = `${inputWidth.value}px`;
+            div.style.background = `${inputColor.value}`;
+            div.style.left = `${inputDirectionX.value}px`;
+            div.style.top = `${inputDirectionY.value}px`;
+
+            //appending all the divs inside output-div
+            outputDiv.appendChild(div);
+            countDiv.innerHTML++;
+        }
+        //function for a page reload
+        function resetPage(){
+            location.reload();
+        }
+
+        //EVENTS:
+        addBoxBtn.onclick = addDiv;
+        resetBtn.onclick = resetPage;
+
+
+    </script>
+    
+    </body>
+</html>

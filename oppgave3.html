@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 3 - Middelalderbygninger</title>
+</head>
+<body>
+
+    <!-- Det er lov å endre/legge til HTML -->
+
+    <h1>Middelalderbygninger</h1>
+    <p>Lyst til å bo i en middelalderbygning? Vi har de beste middelalderbygningene! :)</p>
+
+    <input id="show-all-btn" type="button" value="Vis alle">
+
+    <hr>
+    
+    <label>Minimum pris</label>
+    <input id="min-price" type="number">
+    <label>Maksimum pris</label>
+    <input id="max-price" type="number">
+    <input id="show-by-price-btn" type="button" value="Vis etter pris">
+
+    <hr>
+
+    <!-- Hint: Å hente value fra valgt <option> fungerer på samme måte som å hente value fra en tekstboks -->
+    <select id="category-select"><!-- Du endrer på options for å tilpasse til din løsning -->
+        <option>--Velg kategori--</option>
+        <option value="1-person">1-person</option>
+        <option value="2-person">2 person</option>
+        <option value="30-person">30 person</option>
+        <option value="100-person">100 person</option>
+    </select>
+
+    <input id="show-category-btn" type="button" value="Vis etter kategori">
+
+    <hr>
+
+    <div id="output-div">
+
+    </div>
+
+    <script>
+        //variables, Output-div with all houses
+        var outputDiv = document.getElementById("output-div");
+        var outputAllBtn = document.getElementById("show-all-btn");
+
+        //variables for output categor button and select input
+        var categorySelect = document.getElementById("category-select");
+        var outputCategoryBtn = document.getElementById("show-category-btn");
+
+        //pricing variables
+        var minPrice = document.getElementById("min-price");
+        var maxPrice = document.getElementById("max-price");
+        var showByPriceBtn = document.getElementById("show-by-price-btn")
+
+        //Array for all houses
+        var houseArray = [
+            {name: "Hut", price: 990, imageName: "building-1.png", category: "1-person"},
+            {name: "Hut2", price: 1499, imageName: "building-2.png", category: "1-person"},
+            {name: "Double Hut", price: 2999, imageName: "building-3.png", category: "2-person"},
+            {name: "Hotel", price: 14999, imageName: "building-4.png", category: "30-person"},
+            {name: "Castle", price: 49900, imageName: "building-5.png", category: "100-person"},
+            {name: "Evil Castle", price: 99900, imageName: "building-6.png", category: "100-person"}
+        ];
+
+        //function for getting all houses with for loop that refer to outputhouse function with parameters
+        function allHouses(){
+            outputDiv.innerHTML = "";
+            for(var i = 0; i < houseArray.length; i++){
+                outputHouse(houseArray[i]);
+            }
+        }
+
+        //function for outputting specific category, with for loop same previous function
+        function outputCategory(){
+            outputDiv.innerHTML="";
+            var whatCategory = categorySelect.value;
+
+            for(var i = 0; i < houseArray.length; i++){
+                if(houseArray[i].category === whatCategory){
+                    outputHouse(houseArray[i]);
+                }
+            }
+        }
+
+        //function for price range, refers to ouputhouse as well, with parameters
+        function showByPrice(){
+            outputDiv.innerHTML="";
+            for(var i = 0; i < houseArray.length; i++){
+                if(houseArray[i].price > minPrice.value && houseArray[i].price < maxPrice.value){
+                    outputHouse(houseArray[i]);
+                }
+            }
+        }
+
+        //function for outputting wanted houses by users choices. Parameters from previous functions.
+        function outputHouse(house){
+            outputDiv.innerHTML += `
+            <div>
+                <h2>${house.name}</h2>
+                <h3>pris: ${house.price} gull</h3>
+                <img src="images/${house.imageName}" width=300/>
+            </div>
+            `;
+        }
+
+        //All button events
+        outputAllBtn.onclick = allHouses;
+        outputCategoryBtn.onclick = outputCategory;
+        showByPriceBtn.onclick = showByPrice;
+
+
+
+    </script>
+
+</body>
+</html>

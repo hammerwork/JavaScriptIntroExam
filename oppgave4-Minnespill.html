@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 4 Minnespill</title>
+</head>
+<body>
+
+    <!--All HTML elements, buttons, input, span etc.-->
+    <div style="font-size: 50px;">Husk dette tallet: <span id="nr-span"></span></div>
+    <hr>
+    <label style="font-size: large;">Hvilket nummer så du?</label>
+    <input id="input-number" type="number"/>
+    <button id="check-btn">Sjekk</button>
+
+    <hr>
+
+    <p>Hvor mange rette:<span id="count-right">0</span></p>
+    <p>Hvor mange feil:<span id="count-wrong">0</span></p>
+
+    <script>
+
+        //ALL VARIABLES
+        var inputGuess = document.getElementById("guess-number");
+        var numberGenerated = document.getElementById("nr-span");
+        var numberInput = document.getElementById("input-number");
+        var checkbtn = document.getElementById("check-btn");
+
+        //RIGHTCOUNT, WRONGCOUNT
+
+        rightCount = document.getElementById("count-right");
+        wrongCount = document.getElementById("count-wrong");
+
+        //Using global variable so all function can access
+        var random = {};
+
+        //generates random number, inputs and removes
+        function randomNumber(){
+            //all random.value variables will be accessed because of global variabel.
+            random.value = Math.floor(Math.random()*5000+1000);
+
+            numberGenerated.innerHTML=random.value;
+            
+            //Deletes number after 2 seconds
+            setTimeout(function(){numberGenerated.innerHTML="";}, 2000);
+        }
+
+        //Else and if, checks if answer is same as random generated number
+        function checkit(){
+            if(numberInput.value == random.value){
+                rightCount.innerHTML++;
+            }
+            else if(numberInput.value != random.value){
+                wrongCount.innerHTML++;
+            }
+            //Restarts page load function
+            randomNumber();
+        }
+
+        //Button event and randomnumber function on page load.
+        checkbtn.onclick = checkit;
+        randomNumber();
+    </script>
+</body>
+</html>
